@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Jejak Sang Pahlawan: Menjelajah Benua</title>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--sky:#dff1fb;--ocean:#1d6fa5;--deep:#0f4c75;--earth:#8a5a36;--sand:#f6e8d3;--card:#ffffff;--text:#2b2118;--ok:#2e8b57;--bad:#c0504d;--line:#e3cfae;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--sky:#0f2a3d;--ocean:#6bb8e8;--deep:#a9dcf8;--earth:#d9a672;--sand:#2a2118;--card:#1c2a35;--text:#f1e7d8;--line:#4a3a28}}
+*{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;font-family:"Baloo 2","Trebuchet MS",system-ui,sans-serif;font-size:18px;line-height:1.5;color:var(--text);background:linear-gradient(var(--sky) 0,var(--sky) 55%,var(--sand) 100%);min-height:100vh;overflow-x:hidden}
+.cloud{position:fixed;font-size:56px;opacity:.7;animation:drift 40s linear infinite;pointer-events:none;top:12%}
+.cloud.b{top:30%;font-size:40px;animation-duration:55s;animation-delay:-20s}
+@keyframes drift{from{transform:translateX(-120px)}to{transform:translateX(110vw)}}
+header.bar{position:sticky;top:0;z-index:5;background:var(--deep);color:#fff;padding:8px 14px;display:flex;align-items:center;gap:10px;padding-top:calc(8px + env(safe-area-inset-top,0px))}
+header.bar b{font-weight:800;font-size:17px;white-space:nowrap}
+.prog{flex:1;height:10px;background:rgba(255,255,255,.25);border-radius:9px;overflow:hidden}
+.prog i{display:block;height:100%;width:0;background:#ffd27a;border-radius:9px;transition:width .5s}
+main{max-width:860px;margin:0 auto;padding:18px 14px 90px;position:relative}
+section{display:none}
+section.on{display:block;animation:pop .5s ease}
+@keyframes pop{from{opacity:0;transform:scale(.96)}to{opacity:1;transform:none}}
+h1,h2,h3{font-family:inherit;line-height:1.2;margin:.2em 0 .4em;color:var(--deep)}
+h1{font-size:2.3rem;font-weight:800}h2{font-size:1.7rem;font-weight:800}h3{font-size:1.15rem}
+.card{background:var(--card);border:3px solid var(--line);border-radius:22px;padding:18px;margin:12px 0;box-shadow:0 5px 0 var(--line)}
+.hero{text-align:center;padding:26px 14px}
+.hero .big{font-size:5rem;display:inline-block;animation:bob 2.2s ease-in-out infinite}
+@keyframes bob{50%{transform:translateY(-14px) rotate(-6deg)}}
+.hero p{max-width:34em;margin:.4em auto}
+.id{display:grid;grid-template-columns:auto 1fr;gap:4px 12px;text-align:left;max-width:420px;margin:14px auto 0;background:var(--sand);border-radius:14px;padding:12px 16px}
+.id span{color:var(--earth);font-weight:700}
+button{font:inherit;cursor:pointer;border:0}
+.btn{background:var(--earth);color:#fff;font-weight:700;padding:10px 22px;border-radius:30px;box-shadow:0 4px 0 #5e3a1f;transition:transform .15s}
+.btn:hover{transform:translateY(-2px)}.btn:active{transform:translateY(3px);box-shadow:0 1px 0 #5e3a1f}
+.btn.blue{background:var(--ocean);box-shadow:0 4px 0 var(--deep);color:#fff}
+.btn[disabled]{opacity:.45;cursor:not-allowed}
+:focus-visible{outline:4px solid #ffb703;outline-offset:2px}
+.goals{list-style:none;padding:0;margin:0}
+.goals li{display:flex;gap:12px;align-items:flex-start;padding:10px 0;border-bottom:2px dashed var(--line)}
+.goals li:last-child{border:0}.goals em{font-style:normal;font-size:2rem}
+.tabs{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0}
+.tab{background:var(--card);border:3px solid var(--line);color:var(--text);padding:6px 14px;border-radius:30px;font-weight:700}
+.tab[aria-selected="true"]{background:var(--ocean);border-color:var(--deep);color:#fff;transform:scale(1.07)}
+.cont h3{font-size:1.4rem}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0}
+.chip{background:var(--sand);border:2px solid var(--line);border-radius:14px;padding:6px 12px}
+.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:10px}
+.fact{background:var(--sand);border-radius:16px;padding:12px;border-left:6px solid var(--ocean)}
+.fact b{color:var(--earth)}
+.use{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:10px}
+.use div{background:var(--sky);border-radius:16px;padding:12px;border:2px solid var(--ocean)}
+.nav{display:flex;justify-content:space-between;gap:10px;margin-top:18px}
+.opts{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:12px 0}
+.opt{background:var(--card);border:3px solid var(--ocean);color:var(--text);border-radius:16px;padding:10px;font-weight:700;text-align:left;transition:transform .15s}
+.opt:hover:not([disabled]){transform:scale(1.04)}
+.opt.ok{background:var(--ok);border-color:var(--ok);color:#fff;animation:jump .5s}
+.opt.no{background:var(--bad);border-color:var(--bad);color:#fff;animation:shake .4s}
+.opt.sel{background:#ffd27a;border-color:var(--earth);color:#2b2118}
+.opt.done{background:var(--ok);border-color:var(--ok);color:#fff;pointer-events:none}
+@keyframes jump{40%{transform:translateY(-12px)}}
+@keyframes shake{25%{transform:translateX(-8px)}75%{transform:translateX(8px)}}
+.fb{border-radius:16px;padding:12px 16px;margin:10px 0;font-weight:500}
+.fb.ok{background:#d8f3e3;color:#12532f;border:2px solid var(--ok)}
+.fb.no{background:#fbe3e1;color:#7a1f1c;border:2px solid var(--bad)}
+.landmark{font-size:4rem;text-align:center;animation:bob 2.5s ease-in-out infinite}
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.pair .col{display:flex;flex-direction:column;gap:8px}
+.stars{font-size:3.4rem;text-align:center}
+.moods{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.mood{font-size:2.6rem;background:var(--card);border:3px solid var(--line);border-radius:50%;width:74px;height:74px;transition:transform .2s}
+.mood[aria-pressed="true"]{border-color:var(--ocean);background:var(--sky);transform:scale(1.2)}
+textarea{width:100%;font:inherit;border-radius:14px;border:3px solid var(--line);padding:10px;background:var(--card);color:var(--text);min-height:80px}
+.chk label{display:flex;gap:10px;align-items:center;padding:6px 0}
+.chk input{width:24px;height:24px;accent-color:var(--ocean)}
+.conf{position:fixed;top:-30px;font-size:26px;pointer-events:none;z-index:9;animation:fall 2.4s linear forwards}
+@keyframes fall{to{transform:translateY(110vh) rotate(540deg)}}
+@media (max-width:520px){h1{font-size:1.8rem}body{font-size:17px}.pair{gap:6px}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="cloud" aria-hidden="true">☁️</div><div class="cloud b" aria-hidden="true">☁️</div>
+<header class="bar"><b>🧭 Jejak Sang Pahlawan</b><div class="prog" aria-hidden="true"><i id="pg"></i></div></header>
+<main>
+
+<section id="s0" class="on">
+ <div class="card hero">
+  <div class="big" aria-hidden="true">🦸‍♂️🌍</div>
+  <h1>Jejak Sang Pahlawan</h1>
+  <p>Ayo jadi Pahlawan Bumi! Jelajahi enam benua, kenali negara dan keajaiban alamnya, lalu temukan cara negara memanfaatkannya.</p>
+  <div class="id">
+   <span>Mata pelajaran</span><div>IPAS</div>
+   <span>Kelas</span><div>6 SD</div>
+   <span>Topik</span><div>Benua dan negara di dunia</div>
+   <span>Namamu</span><div><input id="nm" placeholder="Tulis namamu" style="font:inherit;border:2px solid var(--line);border-radius:10px;padding:4px 8px;width:100%;background:var(--card);color:var(--text)"></div>
+  </div>
+  <div class="nav" style="justify-content:center"><button class="btn" onclick="go(1)">Mulai Petualangan 🚀</button></div>
+ </div>
+</section>
+
+<section id="s1">
+ <h2>🎯 Tujuan Pembelajaran</h2>
+ <div class="card"><p>Setelah belajar, kamu dapat:</p>
+ <ul class="goals">
+  <li><em>🗺️</em><div>Menyebutkan pembagian wilayah di enam benua dan ciri khas alamnya.</div></li>
+  <li><em>🏔️</em><div>Mengenali ciri khas beberapa negara dan bentang alam terkenalnya.</div></li>
+  <li><em>💡</em><div>Menganalisis negara yang pandai memanfaatkan kondisi alamnya.</div></li>
+ </ul></div>
+ <div class="nav"><button class="btn blue" onclick="go(0)">⬅ Kembali</button><button class="btn" onclick="go(2)">Lanjut ➡</button></div>
+</section>
+
+<section id="s2">
+ <h2>📖 Materi Inti</h2>
+ <p>Ketuk nama benua untuk melihat isinya!</p>
+ <div class="tabs" id="tabs" role="tablist"></div>
+ <div class="card cont" id="cont"></div>
+ <div class="card"><h3>🌟 Negara yang pandai memanfaatkan alam</h3>
+  <div class="use">
+   <div>🇳🇱 <b>Belanda</b>: daratannya rendah, jadi dibuat tanggul dan kincir angin. Tanahnya subur untuk kebun bunga tulip.</div>
+   <div>🇨🇭 <b>Swiss</b>: Pegunungan Alpen jadi tempat wisata ski dan sumber listrik tenaga air.</div>
+   <div>🇪🇬 <b>Mesir</b>: Sungai Nil mengairi sawah dan ladang di tengah gurun.</div>
+   <div>🇸🇬 <b>Singapura</b>: letaknya di jalur kapal dunia, jadi pelabuhannya sangat sibuk.</div>
+   <div>🇸🇦 <b>Arab Saudi</b>: menggali minyak bumi yang banyak di bawah gurunnya.</div>
+   <div>🇧🇷 <b>Brasil</b>: hutan Amazon dan tanah suburnya cocok untuk kopi serta wisata alam.</div>
+  </div>
+ </div>
+ <div class="nav"><button class="btn blue" onclick="go(1)">⬅ Kembali</button><button class="btn" onclick="go(3)">Ayo Bermain ➡</button></div>
+</section>
+
+<section id="s3">
+ <h2>🎮 Aktivitas Interaktif</h2>
+ <div class="card"><h3>Misi 1: Tebak Benuanya!</h3><div id="g1"></div></div>
+ <div class="card"><h3>Misi 2: Pasangkan Negara dan Manfaatnya</h3>
+  <p>Ketuk satu negara, lalu ketuk manfaatnya yang cocok.</p><div id="g2"></div></div>
+ <div class="nav"><button class="btn blue" onclick="go(2)">⬅ Kembali</button><button class="btn" id="to4" onclick="go(4)">Mulai Kuis ➡</button></div>
+</section>
+
+<section id="s4">
+ <h2>📝 Kuis Pahlawan</h2>
+ <div class="card" id="quiz"></div>
+</section>
+
+<section id="s5">
+ <h2>💬 Umpan Balik dan Refleksi</h2>
+ <div class="card" id="result"></div>
+ <div class="card"><h3>Perasaanmu setelah belajar?</h3>
+  <div class="moods" id="moods"></div>
+  <div class="chk" style="margin-top:12px"><p><b>Centang yang sudah kamu bisa:</b></p>
+   <label><input type="checkbox"> Aku bisa menyebutkan enam benua.</label>
+   <label><input type="checkbox"> Aku tahu ciri khas beberapa negara.</label>
+   <label><input type="checkbox"> Aku bisa menjelaskan cara negara memanfaatkan alamnya.</label></div>
+  <p><b>Bagian apa yang paling menarik bagimu?</b></p>
+  <textarea placeholder="Tulis ceritamu di sini..."></textarea>
+  <p id="moodmsg" style="font-weight:700;color:var(--earth)"></p>
+ </div>
+ <div class="nav"><button class="btn blue" onclick="go(2)">📖 Baca Materi Lagi</button><button class="btn" onclick="resetAll()">🔄 Main Lagi</button></div>
+</section>
+</main>
+
+<script>
+var $=function(i){return document.getElementById(i)};
+var cur=0,N=6;
+function go(n){
+ cur=n;
+ document.querySelectorAll("section").forEach(function(s,i){s.classList.toggle("on",i===n)});
+ $("pg").style.width=(n/(N-1)*100)+"%";
+ window.scrollTo({top:0,behavior:"smooth"});
+ if(n===0&&false){}
+ if(n===5)showResult();
+}
+function confetti(k){
+ var e=["⭐","🌟","🍃","🦋","🏅"];
+ for(var i=0;i<(k||18);i++){var c=document.createElement("div");c.className="conf";c.textContent=e[i%e.length];
+  c.style.left=Math.random()*100+"vw";c.style.animationDelay=Math.random()*.6+"s";document.body.appendChild(c);
+  setTimeout(function(x){x.remove()},3200,c);}
+}
+
+/* Materi */
+var C=[
+{n:"Asia",i:"🐼",w:"Asia Timur, Tenggara, Selatan, Tengah, Barat",f:"Benua terluas dan paling banyak penduduknya. Ada pegunungan tertinggi dan hutan tropis.",x:[["🗻","Jepang","Gunung Fuji, gunung berapi yang cantik."],["🏔️","Nepal","Gunung Everest, puncak tertinggi dunia."],["🏯","Tiongkok","Sungai Yangtze dan dataran luas."]]},
+{n:"Afrika",i:"🦁",w:"Afrika Utara, Barat, Tengah, Timur, Selatan",f:"Ada gurun pasir terluas (Sahara), sungai panjang, dan padang savana tempat hewan liar hidup.",x:[["🏜️","Mesir","Sungai Nil dan Piramida di tepi gurun."],["🦓","Kenya","Savana luas dan hewan liar."],["💧","Zambia","Air Terjun Victoria yang megah."]]},
+{n:"Eropa",i:"🏰",w:"Eropa Utara, Barat, Tengah, Selatan, Timur",f:"Ada empat musim, pegunungan salju, dan banyak sungai yang dipakai untuk pelayaran.",x:[["⛰️","Swiss","Pegunungan Alpen yang bersalju."],["🌷","Belanda","Dataran rendah, kincir angin, kebun tulip."],["🌊","Norwegia","Fyord, laut yang masuk di antara tebing."]]},
+{n:"Amerika",i:"🦅",w:"Amerika Utara, Tengah, dan Selatan",f:"Membentang dari dekat kutub utara sampai ujung selatan. Ada hutan hujan, pegunungan Andes, dan ngarai besar.",x:[["🌳","Brasil","Hutan hujan Amazon, paru-paru dunia."],["🏞️","Amerika Serikat","Grand Canyon, ngarai yang sangat dalam."],["⛰️","Peru","Pegunungan Andes dan kota Machu Picchu."]]},
+{n:"Australia",i:"🦘",w:"Australia dan Oseania (Selandia Baru, Papua Nugini, pulau Pasifik)",f:"Benua terkecil. Banyak hewan unik seperti kanguru dan koala, serta daerah gurun di tengahnya.",x:[["🐠","Australia","Great Barrier Reef, terumbu karang terbesar."],["🪨","Australia","Uluru, batu raksasa berwarna merah."],["🥝","Selandia Baru","Pegunungan, danau, dan padang rumput."]]},
+{n:"Antartika",i:"🐧",w:"Wilayah kutub selatan, tanpa negara tetap",f:"Benua paling dingin, hampir seluruhnya tertutup es. Tidak ada penduduk tetap, hanya peneliti dan penguin.",x:[["🧊","Lapisan es","Menyimpan banyak air tawar bumi."],["🐧","Penguin","Hewan yang bertahan di udara beku."],["🔬","Peneliti","Belajar tentang iklim bumi."]]}];
+(function(){
+ var t=$("tabs");
+ C.forEach(function(c,k){var b=document.createElement("button");b.className="tab";b.setAttribute("role","tab");b.textContent=c.i+" "+c.n;b.onclick=function(){show(k)};t.appendChild(b)});
+ window.show=function(k){
+  document.querySelectorAll(".tab").forEach(function(b,j){b.setAttribute("aria-selected",j===k)});
+  var c=C[k];
+  $("cont").innerHTML="<h3>"+c.i+" Benua "+c.n+"</h3><p>"+c.f+"</p><p><b>Pembagian wilayah:</b></p><div class='chips'>"+c.w.split(", ").map(function(w){return "<span class='chip'>📍 "+w+"</span>"}).join("")+"</div><div class='facts'>"+c.x.map(function(x){return "<div class='fact'>"+x[0]+" <b>"+x[1]+"</b><br>"+x[2]+"</div>"}).join("")+"</div>";
+ };
+ show(0);
+})();
+
+/* Aktivitas 1 */
+var G=[["🗻","Gunung Fuji","Asia"],["🏜️","Gurun Sahara","Afrika"],["🌷","Kebun tulip dan kincir angin","Eropa"],["🌳","Hutan hujan Amazon","Amerika"],["🐨","Koala dan kanguru","Australia"],["🐧","Penguin di lapisan es","Antartika"]];
+var g1i=0,g1s=0;
+function g1(){
+ var box=$("g1");
+ if(g1i>=G.length){box.innerHTML="<div class='fb ok'>🎉 Hebat! Skor misi 1: "+g1s+" dari "+G.length+".</div>";confetti(12);return}
+ var q=G[g1i];
+ box.innerHTML="<div class='landmark' aria-hidden='true'>"+q[0]+"</div><p style='text-align:center'><b>"+q[1]+"</b> ada di benua apa?</p><div class='opts'>"+C.map(function(c){return "<button class='opt'>"+c.i+" "+c.n+"</button>"}).join("")+"</div><div id='f1'></div>";
+ box.querySelectorAll(".opt").forEach(function(b,j){b.onclick=function(){
+  var ok=C[j].n===q[2];
+  box.querySelectorAll(".opt").forEach(function(x){x.disabled=true});
+  b.classList.add(ok?"ok":"no");
+  if(ok)g1s++;
+  $("f1").innerHTML="<div class='fb "+(ok?"ok":"no")+"'>"+(ok?"Benar! Kamu pintar!":"Belum tepat. Jawabannya benua "+q[2]+".")+"</div><button class='btn blue' id='nx1'>Lanjut</button>";
+  $("nx1").onclick=function(){g1i++;g1()};
+ }});
+}
+g1();
+
+/* Aktivitas 2 */
+var P=[["🇳🇱 Belanda","Membangun tanggul dan kincir angin"],["🇨🇭 Swiss","Wisata ski dan listrik tenaga air"],["🇪🇬 Mesir","Mengairi ladang dari Sungai Nil"],["🇸🇬 Singapura","Pelabuhan di jalur kapal dunia"],["🇸🇦 Arab Saudi","Menambang minyak bumi"],["🇧🇷 Brasil","Wisata hutan dan kebun kopi"]];
+var sel=null,doneN=0;
+function g2(){
+ var order=P.map(function(p,i){return i}).sort(function(a,b){return (a*7%5)-(b*7%5)||a-b});
+ $("g2").innerHTML="<div class='pair'><div class='col' id='L'></div><div class='col' id='R'></div></div><div id='f2'></div>";
+ P.forEach(function(p,i){var b=document.createElement("button");b.className="opt";b.textContent=p[0];b.onclick=function(){
+  document.querySelectorAll("#L .opt").forEach(function(x){x.classList.remove("sel")});b.classList.add("sel");sel=i};$("L").appendChild(b)});
+ order.forEach(function(i){var b=document.createElement("button");b.className="opt";b.textContent=P[i][1];b.onclick=function(){
+  if(sel===null){$("f2").innerHTML="<div class='fb no'>Pilih negara dulu di sebelah kiri ya.</div>";return}
+  if(sel===i){document.querySelectorAll("#L .opt")[i].className="opt done";b.className="opt done";sel=null;doneN++;
+   $("f2").innerHTML=doneN===P.length?"<div class='fb ok'>🎉 Semua pasangan benar! Negara-negara ini pandai memanfaatkan alamnya.</div>":"<div class='fb ok'>Cocok! Kondisi alam bisa jadi sumber rezeki.</div>";
+   if(doneN===P.length)confetti(16);
+  }else{b.classList.add("no");setTimeout(function(){b.classList.remove("no")},450);
+   $("f2").innerHTML="<div class='fb no'>Belum cocok. Coba pikirkan: alam apa yang dimiliki negara itu?</div>"}
+ };$("R").appendChild(b)});
+}
+g2();
+
+/* Kuis */
+var Q=[
+{t:"mc",q:"Benua apa yang paling luas di dunia?",o:["Afrika","Asia","Eropa","Australia"],a:1,ok:"Tepat sekali! Kamu hafal benua terluas.",no:"Asia adalah benua terluas sekaligus paling banyak penduduknya."},
+{t:"tf",q:"Antartika adalah benua yang sangat dingin dan hampir seluruhnya tertutup es.",a:true,ok:"Benar! Kamu seperti penjelajah kutub sejati.",no:"Pernyataan ini benar. Antartika berada di kutub selatan, jadi suhunya sangat rendah dan tertutup es."},
+{t:"mc",q:"Sungai Nil yang terkenal ada di benua...",o:["Afrika","Amerika","Asia","Eropa"],a:0,ok:"Keren! Sungai Nil mengalir di Afrika.",no:"Sungai Nil mengalir di benua Afrika, melewati negara Mesir sampai ke Laut Tengah."},
+{t:"tf",q:"Gunung Fuji terletak di negara Brasil.",a:false,ok:"Betul! Kamu teliti sekali.",no:"Pernyataan ini salah. Gunung Fuji ada di Jepang, benua Asia. Brasil terkenal dengan hutan Amazon."},
+{t:"mc",q:"Hutan hujan Amazon yang luas terletak di negara...",o:["Mesir","Jepang","Brasil","Norwegia"],a:2,ok:"Hebat! Amazon adalah paru-paru dunia.",no:"Hutan Amazon sebagian besar ada di Brasil, benua Amerika Selatan."},
+{t:"mc",q:"Belanda berdataran rendah. Apa yang dibuat agar daratan tidak kebanjiran?",o:["Tanggul dan pengatur air","Gunung buatan","Gurun pasir","Pabrik es"],a:0,ok:"Mantap! Belanda pandai mengatur air.",no:"Belanda membangun tanggul dan pompa air (dulu kincir angin) supaya daratan yang rendah tetap aman."},
+{t:"tf",q:"Mesir memanfaatkan Sungai Nil untuk mengairi sawah dan ladang.",a:true,ok:"Benar! Alam dimanfaatkan dengan bijak.",no:"Pernyataan ini benar. Di tengah gurun, air Sungai Nil membuat tanah di tepinya subur."},
+{t:"mc",q:"Great Barrier Reef, terumbu karang terbesar dunia, ada di benua...",o:["Asia","Antartika","Amerika","Australia"],a:3,ok:"Wow, tepat! Kamu bisa jadi pemandu wisata laut.",no:"Great Barrier Reef ada di lepas pantai timur Australia."},
+{t:"mc",q:"Singapura kecil tetapi maju. Salah satu sebabnya adalah...",o:["Punya banyak gunung berapi","Letaknya di jalur pelayaran dunia","Punya banyak salju","Punya hutan luas"],a:1,ok:"Pintar! Letak yang strategis jadi kekuatan.",no:"Singapura berada di jalur kapal dunia, sehingga pelabuhannya ramai dan menguntungkan."},
+{t:"tf",q:"Pegunungan Alpen tidak memberi manfaat apa pun bagi Swiss.",a:false,ok:"Betul! Kamu sudah paham cara memanfaatkan alam.",no:"Pernyataan ini salah. Alpen dipakai untuk wisata ski dan sumber listrik tenaga air."}];
+var qi=0,qs=0,cheer=["⭐","🌟","🏅"];
+function quiz(){
+ var box=$("quiz");
+ if(qi>=Q.length){go(5);return}
+ var q=Q[qi];
+ var opts=q.t==="tf"?["Benar","Salah"]:q.o;
+ box.innerHTML="<p>Soal "+(qi+1)+" dari "+Q.length+" "+("🟦".repeat(qi))+("⬜".repeat(Q.length-qi))+"</p><h3>"+q.q+"</h3><div class='opts'>"+opts.map(function(o,i){return "<button class='opt'>"+(q.t==="tf"?(i?"❌ ":"✅ "):"")+o+"</button>"}).join("")+"</div><div id='fq'></div>";
+ box.querySelectorAll(".opt").forEach(function(b,i){b.onclick=function(){
+  var ans=q.t==="tf"?(i===0):i,ok=q.t==="tf"?(ans===q.a):(i===q.a);
+  var correctIdx=q.t==="tf"?(q.a?0:1):q.a;
+  box.querySelectorAll(".opt").forEach(function(x,j){x.disabled=true;if(j===correctIdx)x.classList.add("ok")});
+  if(!ok)b.classList.add("no");else{qs++;confetti(8)}
+  $("fq").innerHTML=ok?"<div class='fb ok'>🎉 "+q.ok+"</div>":"<div class='fb no'>💡 Penjelasan: "+q.no+"</div>";
+  $("fq").innerHTML+="<button class='btn' id='nq'>"+(qi===Q.length-1?"Lihat Hasil":"Soal Berikutnya")+" ➡</button>";
+  $("nq").onclick=function(){qi++;quiz()};
+ }});
+}
+quiz();
+
+function showResult(){
+ var nm=$("nm").value.trim()||"Pahlawan Bumi",sc=qs*10;
+ var st=sc>=80?"🏆🌟🏆":sc>=60?"🥈⭐🥈":"🌱💪🌱";
+ var msg=sc>=80?"Luar biasa! Kamu layak jadi Pahlawan Bumi.":sc>=60?"Bagus! Sedikit lagi kamu jadi ahli benua.":"Jangan menyerah! Baca materi lagi, lalu coba kuis sekali lagi.";
+ $("result").innerHTML="<div class='stars'>"+st+"</div><h3 style='text-align:center'>Selamat, "+nm.replace(/</g,"&lt;")+"!</h3><p style='text-align:center;font-size:1.6rem;font-weight:800;color:var(--earth)'>Nilaimu: "+sc+"</p><p style='text-align:center'>"+qs+" dari "+Q.length+" jawaban benar. "+msg+"</p>";
+ if(sc>=60)confetti(26);
+}
+var M=[["😟","Masih bingung. Tidak apa-apa, ayo ulangi pelan-pelan!"],["😐","Lumayan paham. Terus berlatih ya!"],["🙂","Senang! Kamu sudah banyak tahu."],["🤩","Seru sekali! Kamu siap menjelajah dunia."]];
+M.forEach(function(m,i){var b=document.createElement("button");b.className="mood";b.textContent=m[0];b.setAttribute("aria-pressed","false");b.onclick=function(){
+ document.querySelectorAll(".mood").forEach(function(x){x.setAttribute("aria-pressed","false")});b.setAttribute("aria-pressed","true");$("moodmsg").textContent=m[1]};$("moods").appendChild(b)});
+function resetAll(){qi=0;qs=0;g1i=0;g1s=0;doneN=0;sel=null;g1();g2();quiz();document.querySelectorAll(".chk input").forEach(function(c){c.checked=false});document.querySelectorAll(".mood").forEach(function(x){x.setAttribute("aria-pressed","false")});$("moodmsg").textContent="";go(2)}
+</script>
+</body>
+</html>
